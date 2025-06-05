@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Base\Building\Manager as BuildingManager;
-use App\Base\Organization\Manager as OrganizationManager;
-use App\Http\Resources\Building as BuildingResource;
-use App\Http\Resources\Organization as OrganizationResource;
+use App\Http\Resources\{
+    Building as BuildingResource,
+    Organization as OrganizationResource,
+};
 use OpenApi\Annotations as OA;
 
 class BuildingController extends Controller
 {
     /**
      * @param BuildingManager $building_manager
-     * @param \App\Base\Organization\Manager $organization_manager
      */
     public function __construct(
         private readonly BuildingManager $building_manager,
-        private readonly OrganizationManager $organization_manager,
     ) {
         //
     }
@@ -97,6 +96,6 @@ class BuildingController extends Controller
      */
     public function organizations(int $id)
     {
-        return OrganizationResource::collection($this->organization_manager->getByBuildingId($id));
+        return OrganizationResource::collection($this->building_manager->getOrganizationsById($id));
     }
 }

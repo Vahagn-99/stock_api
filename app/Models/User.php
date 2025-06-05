@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Base\Auth\HasCustomToken;
+use App\Base\Access\HasCustomAccessToken;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, HasCustomToken;
+    use HasFactory, HasCustomAccessToken;
 
     /** @var string */
     const TABLE = 'users';

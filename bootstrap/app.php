@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\EnsureApiKeyIsValid;
+use App\Base\Access\Middleware\EnsureApiKeyIsValid;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;

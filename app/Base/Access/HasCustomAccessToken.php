@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Base\Auth;
+namespace App\Base\Access;
 
-use App\Models\AccessToken;
+use App\Models\AccessToken as AccessTokenModel;
 use Carbon\Carbon;
-use Crypt;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-trait HasCustomToken
+trait HasCustomAccessToken
 {
     /**
      * Содание нового токена
@@ -27,7 +26,7 @@ trait HasCustomToken
 
         $hashed_token = hash('sha256', $plain_token);
 
-        $token = new AccessToken();
+        $token = new AccessTokenModel();
 
         $token->user_id = $this->id;
         $token->name = $name;
@@ -85,7 +84,7 @@ trait HasCustomToken
      */
     public function token() : HasOne
     {
-        return $this->hasOne(AccessToken::class, 'user_id', 'id')->latest();
+        return $this->hasOne(AccessTokenModel::class, 'user_id', 'id')->latest();
     }
 
     /**
@@ -95,6 +94,6 @@ trait HasCustomToken
      */
     public function tokens() : HasMany
     {
-        return $this->hasMany(AccessToken::class, 'user_id', 'id')->latest();
+        return $this->hasMany(AccessTokenModel::class, 'user_id', 'id')->latest();
     }
 }

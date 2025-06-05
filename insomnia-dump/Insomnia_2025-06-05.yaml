@@ -1,0 +1,237 @@
+type: collection.insomnia.rest/5.0
+name: Stock
+meta:
+  id: wrk_0f3a51ee26644e7f8d7663bdf739f9a7
+  created: 1749053446357
+  modified: 1749078354905
+collection:
+  - name: buildings
+    meta:
+      id: fld_86a8e7be3b324757baa9d4869b6618ab
+      created: 1749053452129
+      modified: 1749078381509
+      sortKey: -1749053452129
+    children:
+      - url: "{{host}}/api/buildings"
+        name: get all buildings
+        meta:
+          id: req_394be671c44b4c5197ba885767fd7c7c
+          created: 1749053446387
+          modified: 1749081907233
+          isPrivate: false
+          sortKey: -1749053457477
+        method: GET
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_450df4171b1847a9804d9fe5a7490e3e
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+            id: pair_929cba6f1ddc4d45810742c81fee68af
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_7a0c1c83f66f4d02a649df24cb813a29
+          - id: pair_9d0d33e75a5d45ff9b1f58579a4a6ef5
+            name: Accept
+            value: application/json
+            disabled: false
+          - id: pair_239917bc9e4b4e799bcf5e3724895d88
+            name: Authorization
+            value: Api-Key 255a84896984e6351a6c75cbbf3f543e140d795308031dd14d186a338d09ca5e
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{host}}/api/buildings/1/organizations"
+        name: get building organizations
+        meta:
+          id: req_2e9fb6aab9834c1e9cb5aff92382e8ab
+          created: 1749080704496
+          modified: 1749081912187
+          isPrivate: false
+          sortKey: -1748737724780.5
+        method: GET
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_450df4171b1847a9804d9fe5a7490e3e
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+            id: pair_929cba6f1ddc4d45810742c81fee68af
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_7a0c1c83f66f4d02a649df24cb813a29
+          - id: pair_9d0d33e75a5d45ff9b1f58579a4a6ef5
+            name: Accept
+            value: application/json
+            disabled: false
+          - id: pair_239917bc9e4b4e799bcf5e3724895d88
+            name: Authorization
+            value: Api-Key 255a84896984e6351a6c75cbbf3f543e140d795308031dd14d186a338d09ca5e
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Activities
+    meta:
+      id: fld_679e50efd90545bf8872283d4118a015
+      created: 1749080754334
+      modified: 1749111497512
+      sortKey: -1748737699320.5
+    children:
+      - url: "{{host}}/api/activities/1/organizations"
+        name: get activity organizations
+        meta:
+          id: req_9b8bd9cfe3a04a388a4c937cfd03e092
+          created: 1749080754343
+          modified: 1749080783731
+          isPrivate: false
+          sortKey: -1748737724780.5
+        method: GET
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_450df4171b1847a9804d9fe5a7490e3e
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+            id: pair_929cba6f1ddc4d45810742c81fee68af
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_7a0c1c83f66f4d02a649df24cb813a29
+          - id: pair_9d0d33e75a5d45ff9b1f58579a4a6ef5
+            name: Accept
+            value: application/json
+            disabled: false
+          - id: pair_239917bc9e4b4e799bcf5e3724895d88
+            name: Authorization
+            value: Api-Key 255a84896984e6351a6c75cbbf3f543e140d795308031dd14d186a338d09ca5e
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Organizations
+    meta:
+      id: fld_9b65a71b5a894ddda6e40e6168bc0d07
+      created: 1749080814783
+      modified: 1749080814783
+      sortKey: -1748579822916.25
+    children:
+      - url: "{{host}}/api/organizations/search"
+        name: search organizations
+        meta:
+          id: req_0ca9f37d50c44400a5ee0107432a3ebe
+          created: 1749080814784
+          modified: 1749083904581
+          isPrivate: false
+          sortKey: -1748737724780.5
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"text": "",
+            	"coordinates" : {
+            		"latitude": "",
+            		"longitude":"",
+            		"radius":""
+            	},
+            	"building":{
+            		"address":""
+            	},
+            	"activity": {
+            		"name":"",
+            		"deep_search":true
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_7a0c1c83f66f4d02a649df24cb813a29
+          - id: pair_9d0d33e75a5d45ff9b1f58579a4a6ef5
+            name: Accept
+            value: application/json
+            disabled: false
+          - id: pair_239917bc9e4b4e799bcf5e3724895d88
+            name: Authorization
+            value: Api-Key 255a84896984e6351a6c75cbbf3f543e140d795308031dd14d186a338d09ca5e
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{host}}/api/organizations/1"
+        name: get organization by ID
+        meta:
+          id: req_a7cef13547a84490a299537b6bd7c505
+          created: 1749081087045
+          modified: 1749081091807
+          isPrivate: false
+          sortKey: -1748579858432.25
+        method: GET
+        body:
+          mimeType: application/json
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_7a0c1c83f66f4d02a649df24cb813a29
+          - id: pair_9d0d33e75a5d45ff9b1f58579a4a6ef5
+            name: Accept
+            value: application/json
+            disabled: false
+          - id: pair_239917bc9e4b4e799bcf5e3724895d88
+            name: Authorization
+            value: Api-Key 255a84896984e6351a6c75cbbf3f543e140d795308031dd14d186a338d09ca5e
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c3686d2958907255ac1e429600bba89bfddd206c
+    created: 1749053446360
+    modified: 1749053446360
+environments:
+  name: local
+  meta:
+    id: env_c3686d2958907255ac1e429600bba89bfddd206c
+    created: 1749053446359
+    modified: 1749078466592
+    isPrivate: false
+  data:
+    host: stock.loc
+    Api-Key: test

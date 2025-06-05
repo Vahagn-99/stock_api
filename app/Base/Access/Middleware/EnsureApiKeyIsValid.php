@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Base\Access\Middleware;
 
 use App\Models\AccessToken;
 use Closure;

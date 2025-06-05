@@ -39,28 +39,6 @@ class Manager
     }
 
     /**
-     * Поиск организаций по id здания
-     *
-     * @param int $building_id
-     * @return Collection<OrganizationModel>
-     */
-    public function getByBuildingId(int $building_id): Collection
-    {
-        return $this->organization_repository->getByBuildingId($building_id);
-    }
-
-    /**
-     * Поиск организаций по id деятельности
-     *
-     * @param int $activity_id
-     * @return Collection<OrganizationModel>
-     */
-    public function getByActivityId(int $activity_id): Collection
-    {
-        return $this->organization_repository->getByActivityId($activity_id);
-    }
-
-    /**
      * Поиск организаций
      *
      * @param \App\Base\Organization\Search\SearchDto $search

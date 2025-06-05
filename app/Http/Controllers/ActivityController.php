@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Base\Organization\Manager as OrganizationManager;
+use App\Base\Activity\Manager as ActivityManager;
 use App\Http\Resources\Organization as OrganizationResource;
 use OpenApi\Annotations as OA;
 
 class ActivityController extends Controller
 {
     /**
-     * @param \App\Base\Organization\Manager $organization_manager
+     * @param \App\Base\Activity\Manager $organization_manager
      */
     public function __construct(
-        private readonly OrganizationManager $organization_manager,
+        private readonly ActivityManager $organization_manager,
     ) {
         //
     }
@@ -54,6 +54,6 @@ class ActivityController extends Controller
      */
     public function organizations(int $id)
     {
-        return OrganizationResource::collection($this->organization_manager->getByActivityId($id));
+        return OrganizationResource::collection($this->organization_manager->getOrganizationsById($id));
     }
 }
