@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 class CachedRepository extends Repository
 {
     /**
-     * Найти организации по тексту
+     * Найти организации по поиску
      *
      * @param \App\Base\Organization\Search\SearchDto $search
      * @return \Illuminate\Database\Eloquent\Collection<\App\Models\Organization>
