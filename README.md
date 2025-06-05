@@ -40,10 +40,8 @@ docker-compose up -d --build
 ### 5. Генерация API токена
 
 ```bash
-php artisan new:access_token --user_id=1
+php artisan new:access_token
 ```
-
-Если ID пользователя не указан — используется первый доступный.
 
 ---
 
