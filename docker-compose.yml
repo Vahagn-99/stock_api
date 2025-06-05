@@ -1,0 +1,110 @@
+services:
+  stock.app:
+    container_name: stock.app
+    build:
+      args:
+        UID: "${UID:-1000}"
+        GID: "${GID:-1000}"
+        TZ: "${TZ:-UTC}"
+      context: ./_docker/app
+      dockerfile: Dockerfile
+    tty: true
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./_docker/app/php.ini:/usr/local/etc/php/php.ini
+      - ./_docker/app/.zshrc:/home/www-data/.zshrc
+    networks:
+      - app-network
+      - db-network
+      - cache-network
+      - queue-network
+    depends_on:
+      stock.db:
+         condition: service_healthy
+      stock.cache:
+          condition: service_healthy
+      stock.queue:
+          condition: service_healthy
+
+  stock.webserver:
+    container_name: stock.webserver
+    image: "nginx:stable-alpine"
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./_docker/webserver/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./_docker/webserver/log:/var/log/nginx
+    networks:
+      - webserver-network
+      - app-network
+    depends_on:
+      - app
+
+  stock.db:
+    container_name: stock.db
+    image: mysql:latest
+    tty: true
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    ports:
+      - "${DB_FORWARD_PORT:-3306}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - db-network
+
+  stock.cache:
+    container_name: stock.cache
+    image: redis:alpine
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    ports:
+      - "${REDIS_CACHE_QUEUE_PORT:-6379}:6379"
+    volumes:
+      - cache_data:/data
+    networks:
+      - cache-network
+
+  stock.queue:
+    container_name: stock.queue
+    image: redis:alpine
+    tty: true
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+    ports:
+      - "${REDIS_QUEUE_QUEUE_PORT:-6380}:6379"
+    volumes:
+      - queue_data:/data
+    networks:
+      - queue-network
+
+networks:
+  app-network:
+    driver: bridge
+  webserver-network:
+    driver: bridge
+  db-network:
+    driver: bridge
+  cache-network:
+    driver: bridge
+  queue-network:
+    driver: bridge
+
+volumes:
+  db_data:
+  cache_data:
+  queue_data:
