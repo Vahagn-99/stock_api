@@ -8,8 +8,9 @@ REST API приложение для справочника **Организац
 ### 1. Клонирование репозитория
 
 ```bash
-git clone <ваш-репозиторий>
-cd <ваш-проект>
+1. git clone https://github.com/Vahagn-99/stock_api.git stock_api
+
+2. cd stock_api
 ```
 
 ### 2. Настройка переменных окружения
