@@ -34,6 +34,6 @@ class GenerateNewAccessToken extends Command
             $user = User::find($user_id);
         }
 
-        $this->info('Token: ' . $user->newToken('api'));
+        $this->info('Api-Key ' . $user->newToken('api'));
     }
 }
