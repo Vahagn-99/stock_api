@@ -23,14 +23,4 @@ class SearchDto extends Data
     ) {
         //
     }
-
-    /**
-     * Возвращает сериализованный объект для сохранения в кэш как ключ
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return serialize($this);
-    }
 }

@@ -1,4 +1,5 @@
-FROM composer:latest as composer
+FROM composer:latest AS composer
+
 FROM php:8.4-fpm-alpine3.21
 
 ARG TZ
@@ -39,9 +40,10 @@ RUN set -eux \
         libwebp \
         libwebp-tools \
         lz4 \
-        mysql-client
+        mysql-client \
+        supervisor
 
-# Установка php пакетов
+# Установка php-пакетов
 RUN set -eux \
     && apk add --no-cache --virtual .build-deps-php \
         $PHPIZE_DEPS \
@@ -76,26 +78,28 @@ RUN set -eux \
         redis \
         xdebug \
     && apk del -f .build-deps-php \
-    && rm -rf /usr/src/php* \
-    && rm -rf /tmp/pear
+    && rm -rf /usr/src/php* /tmp/pear
 
-# Установка конфигурации
+# Копируем php.ini
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-# Установка composer
+# Копируем composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Копируем конфиг supervisord
+COPY supervisord.conf /etc/supervisord.conf
 
 # Настройка пользователя
 RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
 USER www-data
 
 # Настройка zsh для удобства
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting /home/www-data/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions /home/www-data/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # Порты
 EXPOSE 9000
 
-# Старт php-fpm
-CMD ["php-fpm"]
+# Запуск supervisord
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]

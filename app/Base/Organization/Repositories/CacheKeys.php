@@ -17,7 +17,7 @@ class CacheKeys
      */
     public static function search(SearchDto $search) : string
     {
-        return md5($search.'organization_search');
+        return md5(serialize($search));
     }
 
     /**
@@ -26,9 +26,9 @@ class CacheKeys
      * @param int $building_id
      * @return string
      */
-    public static function getByBuildingId(int $building_id) : string
+    public static function get_by_building_id(int $building_id) : string
     {
-        return md5($building_id.'organization_by_building_id');
+        return md5("$building_id");
     }
 
     /**
@@ -37,8 +37,42 @@ class CacheKeys
      * @param int $activity_id
      * @return string
      */
-    public static function getByActivityId(int $activity_id) : string
+    public static function get_by_activity_id(int $activity_id) : string
     {
-        return md5($activity_id.'organization_by_activity_id');
+        return md5("$activity_id");
+    }
+
+    //****************************************************************
+    //************************** TAGS *****************************
+    //****************************************************************
+
+    /**
+     * Получить тег кэша для поиска организаций
+     *
+     * @return string
+     */
+    public static function search_tag() : string
+    {
+        return 'organizations_search';
+    }
+
+    /**
+     * Получить тег кэша для поиска организаций по id здания
+     *
+     * @return string
+     */
+    public static function get_by_building_id_tag() : string
+    {
+        return 'organizations_by_building_id';
+    }
+
+    /**
+     * Получить тег кэша для поиска организаций по id деятельности
+     *
+     * @return string
+     */
+    public static function get_by_activity_id_tag() : string
+    {
+        return 'organizations_by_activity_id';
     }
 }

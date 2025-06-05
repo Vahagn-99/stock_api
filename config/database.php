@@ -179,6 +179,14 @@ return [
             'database' => env('REDIS_QUEUE_DB', '1'),
         ],
 
+        'default' => [
+            'url' => env('QUEUE_URL'),
+            'host' => env('REDIS_QUEUE_HOST', '127.0.0.1'),
+            'username' => env('QUEUE_USERNAME'),
+            'password' => env('REDIS_QUEUE_PASSWORD'),
+            'port' => env('REDIS_QUEUE_PORT', '6379'),
+            'database' => env('REDIS_QUEUE_DB', '1'),
+        ],
     ],
 
 ];

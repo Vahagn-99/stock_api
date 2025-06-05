@@ -19,7 +19,7 @@ class CachedRepository extends Repository
      */
     public function search(SearchDto $search) : Collection
     {
-        return Cache::remember(CacheKeys::search($search), now()->addDays(30), function () use ($search) {
+        return Cache::tags(CacheKeys::search_tag())->remember(CacheKeys::search($search), now()->addDays(30), function () use ($search) {
             return parent::search($search);
         });
     }
@@ -32,7 +32,7 @@ class CachedRepository extends Repository
      */
     public function getByBuildingId(int $building_id) : Collection
     {
-        return Cache::remember(CacheKeys::getByBuildingId($building_id), now()->addDays(30), function () use ($building_id) {
+        return Cache::tags(CacheKeys::get_by_building_id_tag())->remember(CacheKeys::get_by_building_id($building_id), now()->addDays(30), function () use ($building_id) {
             return parent::getByBuildingId($building_id);
         });
     }
@@ -45,7 +45,7 @@ class CachedRepository extends Repository
      */
     public function getByActivityId(int $activity_id) : Collection
     {
-        return Cache::remember(CacheKeys::getByActivityId($activity_id), now()->addDays(30), function () use ($activity_id) {
+        return Cache::tags(CacheKeys::get_by_activity_id_tag())->remember(CacheKeys::get_by_activity_id($activity_id), now()->addDays(30), function () use ($activity_id) {
             return parent::getByActivityId($activity_id);
         });
     }
